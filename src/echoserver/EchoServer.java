@@ -9,6 +9,8 @@ import java.net.Socket;
 public class EchoServer {
 	public static final int PORT_NUMBER = 6013;
 
+	// Need a class that implements runnable
+
 	public static void main(String[] args) throws IOException, InterruptedException {
 		EchoServer server = new EchoServer();
 		server.start();
