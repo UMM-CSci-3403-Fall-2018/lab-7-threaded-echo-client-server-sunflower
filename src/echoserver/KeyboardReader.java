@@ -1,5 +1,6 @@
 package echoserver;
 
+import java.io.IOException;
 import java.lang.Thread;
 import java.io.OutputStream;
 
@@ -10,10 +11,16 @@ public class KeyboardReader extends Thread{
     this.output = socketOutputStream;
   }
 
-  public void run(){
-    int readByte;
-		while ((readByte = System.in.read()) != -1) {
-      output.write(readByte);
+  public void run() {
+    try {
+      int readByte;
+  		while ((readByte = System.in.read()) != -1) {
+        output.write(readByte);
+      }
+    } catch(IOException ioe) {
+      System.out.println("KeyboardReader has an error");
+      System.out.println(ioe);
     }
+
   }
 }
