@@ -11,19 +11,33 @@ public class EchoClient{
 
 	// Need 2 classes implementing runnable
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		EchoClient client = new EchoClient();
 		client.start();
 	}
 
-	private void start() throws IOException {
-		Socket socket = new Socket("localhost", PORT_NUMBER);
-		InputStream socketInputStream = socket.getInputStream();
-		OutputStream socketOutputStream = socket.getOutputStream();
+	private void start() throws IOException, InterruptedException {
+		try {
+			Socket socket = new Socket("localhost", PORT_NUMBER);
+			InputStream socketInputStream = socket.getInputStream();
+			OutputStream socketOutputStream = socket.getOutputStream();
 
-		Thread r = new Thread(new KeyboardReader(socketOutputStream));
-		r.start();
-		Thread w = new Thread(new ScreenWriter(socketInputStream));
-		w.start();
+			Thread r = new Thread(new KeyboardReader(socketOutputStream));
+			r.start();
+			r.join();
+			socket.shutdownOutput();
+			Thread w = new Thread(new ScreenWriter(socketInputStream));
+			w.start();
+			w.join();
+			//socket.shutdownOutput();
+			
+		} catch(IOException ioe) {
+			System.out.println("EchoClient has an error");
+      System.out.println(ioe);
+		} catch(InterruptedException ie) {
+			System.out.println("EchoClient has an error");
+      System.out.println(ie);
+		}
+
 	}
 }

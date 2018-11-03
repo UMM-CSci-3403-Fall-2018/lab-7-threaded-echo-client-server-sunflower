@@ -14,9 +14,8 @@ public class ScreenWriter extends Thread{
 
   public void run(){
     try {
-      int readByte;
-      while ((readByte = System.in.read()) != -1) {
-        int socketByte = input.read();
+      int socketByte;
+      while ((socketByte = input.read()) != -1) {
         System.out.write(socketByte);
       }
       System.out.flush();
