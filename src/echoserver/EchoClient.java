@@ -22,15 +22,14 @@ public class EchoClient{
 			InputStream socketInputStream = socket.getInputStream();
 			OutputStream socketOutputStream = socket.getOutputStream();
 
-			Thread r = new Thread(new KeyboardReader(socketOutputStream));
+			Thread r = new Thread(new KeyboardReader(socket));
 			r.start();
 			r.join();
-			socket.shutdownOutput();
 			Thread w = new Thread(new ScreenWriter(socketInputStream));
 			w.start();
 			w.join();
 			//socket.shutdownOutput();
-			
+
 		} catch(IOException ioe) {
 			System.out.println("EchoClient has an error");
       System.out.println(ioe);

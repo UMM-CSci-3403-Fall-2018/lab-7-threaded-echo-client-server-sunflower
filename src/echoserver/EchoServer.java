@@ -20,12 +20,9 @@ public class EchoServer {
 		ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
 		while (true) {
 			Socket socket = serverSocket.accept();
-			InputStream inputStream = socket.getInputStream();
-			OutputStream outputStream = socket.getOutputStream();
-			int b;
-			while ((b = inputStream.read()) != -1) {
-				outputStream.write(b);
-			}
+
+			Thread s = new Thread(new ServerThread(socket));
+			s.start();
 		}
 	}
 }

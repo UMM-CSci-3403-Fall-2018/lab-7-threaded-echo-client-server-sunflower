@@ -19,7 +19,6 @@ public class ScreenWriter extends Thread{
         System.out.write(socketByte);
       }
       System.out.flush();
-
     } catch(IOException ioe) {
       System.out.println("ScreenWriter has an error");
       System.out.println(ioe);
