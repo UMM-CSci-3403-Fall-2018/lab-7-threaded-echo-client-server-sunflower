@@ -9,8 +9,6 @@ import java.net.Socket;
 public class EchoServer {
 	public static final int PORT_NUMBER = 6013;
 
-	// Need a class that implements runnable
-
 	public static void main(String[] args) throws IOException, InterruptedException {
 		EchoServer server = new EchoServer();
 		server.start();
@@ -21,6 +19,7 @@ public class EchoServer {
 		while (true) {
 			Socket socket = serverSocket.accept();
 
+			// We always accept then when a accept returns we create a new thread
 			Thread s = new Thread(new ServerThread(socket));
 			s.start();
 		}

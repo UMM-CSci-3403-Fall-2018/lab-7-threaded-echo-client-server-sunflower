@@ -15,9 +15,11 @@ public class ScreenWriter extends Thread{
   public void run(){
     try {
       int socketByte;
+      // Writes while there is data to be written
       while ((socketByte = input.read()) != -1) {
         System.out.write(socketByte);
       }
+      // Send any remaining data
       System.out.flush();
     } catch(IOException ioe) {
       System.out.println("ScreenWriter has an error");

@@ -12,6 +12,7 @@ public class ServerThread extends Thread{
 
   public ServerThread(Socket socket) throws IOException {
     try {
+      // Setters to be used in run() later
       this.socket = socket;
       this.input = socket.getInputStream();
       this.output = socket.getOutputStream();
@@ -23,6 +24,7 @@ public class ServerThread extends Thread{
 
   public void run() {
     try{
+      // Writes until KeyboardReader shutsdown output
       int b;
       while ((b = input.read()) != -1) {
         output.write(b);
